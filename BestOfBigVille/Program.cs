@@ -9,10 +9,16 @@ namespace BestOfBigVille
 {
     class Program
     {
-        public static List<Ville> MesVilles;
         static void Main(string[] args)
         {
-            MesVilles = Json.GetJson();
+
+            Genetique Algo = new Genetique();
+            Algo.TriageList();
+            Algo.CalculDistance();
+
+            
+            
+            
             Console.ReadKey();
         }
     }
