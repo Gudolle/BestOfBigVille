@@ -9,6 +9,7 @@ namespace BestOfBigVille.Models
     class ComposantList
     {
         public List<Ville> Villes { get; set; }
+        public string Identifiant { get; set; }
         public double DistanceTotal { get; set; }
     }
 }
