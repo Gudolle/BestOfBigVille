@@ -16,7 +16,7 @@ namespace BestOfBigVille
 
             Genetique Algo = new Genetique();
 
-            MyMap.Show();
+            //MyMap.Show();
 
             Algo.TriageList();
             for (int i = 0; i < 500; i++)
