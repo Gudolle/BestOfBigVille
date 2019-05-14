@@ -21,7 +21,7 @@ namespace BestOfBigVille
         public void TriageList()
         {
             List<List<Ville>> ListVille = new List<List<Ville>>();
-            for (int i = 0; i <= 33333; i++)
+            for (int i = 0; i <= 10000; i++)
             {
                 List<Ville> NewVille = MesVilles.OrderBy(x => Guid.NewGuid()).ToList();
                 //List<Ville> NewVille = MesVilles;
@@ -63,6 +63,7 @@ namespace BestOfBigVille
 
             Console.WriteLine("===================================");
             MaListDeListVille = MaListDeListVille.OrderBy(x => x.DistanceTotal).Take(1800).ToList();
+            HistoDeListVille = HistoDeListVille.OrderBy(x => x.DistanceTotal).Take(1800).ToList();
             MaListDeListVille.Take(3).ToList().ForEach(x => Console.WriteLine("Distance  = " + Math.Floor(x.DistanceTotal) + "km"));
 
 
@@ -99,7 +100,7 @@ namespace BestOfBigVille
 
                         Enfant.Villes.ForEach(x => Enfant.Identifiant += x.city);
 
-                        if (HistoDeListVille.Where(x => x.Identifiant.Equals(Enfant.Identifiant)).ToList().Count == 0)
+                        if (HistoDeListVille.Where(x => x.Identifiant == Enfant.Identifiant).ToList().Count == 0)
                         {
                             MaListDeListVille.Add(Enfant);
                             HistoDeListVille.Add(Enfant);
@@ -132,7 +133,7 @@ namespace BestOfBigVille
             MutantBaby.Villes[MutatedChromosome2] = tmp;
 
             // Add mutant baby if it hasn't appeared before
-            if (HistoDeListVille.Where(x => x.Identifiant.Equals(MutantBaby.Identifiant)).ToList().Count == 0)
+            if (HistoDeListVille.Where(x => x.Identifiant == MutantBaby.Identifiant).ToList().Count == 0)
             {
                 MaListDeListVille.Add(MutantBaby);
                 HistoDeListVille.Add(MutantBaby);
