@@ -1,16 +1,16 @@
-﻿using System;
+﻿using BestOfBigVille.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using GMap.NET;
-using GMap.NET.WindowsForms;
-using GMap.NET.WindowsForms.Markers;
-using GMap.NET.MapProviders;
 
 namespace BestOfBigVille
 {
@@ -19,14 +19,27 @@ namespace BestOfBigVille
         public Map()
         {
             InitializeComponent();
-            Load += new EventHandler(OnLoad);
-
+            Load += new EventHandler(NaviguateTo);
         }
-        private void OnLoad(object sender, System.EventArgs e)
+
+        private void NaviguateTo(object sender, System.EventArgs e)
         {
-            gmap.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
-            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
-            gmap.SetPositionByKeywords("Paris, France");
+
+            string Contenue = File.ReadAllText("./MyMap.html");
+
+
+            List<Ville> MesVilles = Json.GetJson();
+            List<Gmap> PourGmap = new List<Gmap>();
+            MesVilles.ForEach(x => PourGmap.Add(x.GoogleMap()));
+
+            Contenue = Contenue.Replace("%JSON%", JsonConvert.SerializeObject(PourGmap));
+            webBrowser1.DocumentText = Contenue;
+        }
+
+        private void WebBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            //StringBuilder location = new StringBuilder("http://google.com/");
+            //webBrowser1.Navigate(location.ToString());
         }
     }
 }

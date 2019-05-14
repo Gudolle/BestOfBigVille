@@ -4,19 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using BestOfBigVille.Models;
 
 namespace BestOfBigVille
 {
     class Program
     {
-        public static Map MyMap = new Map();
+
+        [STAThread]
         static void Main(string[] args)
         {
 
-            Genetique Algo = new Genetique();
+            
+            Thread MonShread = new Thread(new ThreadStart(AlgoGenetique));
+            MonShread.SetApartmentState(ApartmentState.STA);
+            MonShread.Start();
 
-            MyMap.Show();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Map());
+
+           
+
+
+
+            Console.ReadKey();
+        }
+
+        public static void AlgoGenetique()
+        {
+            Genetique Algo = new Genetique();
 
             Algo.TriageList();
             for (int i = 0; i < 500; i++)
@@ -24,15 +42,12 @@ namespace BestOfBigVille
                 Algo.CalculDistance();
                 Algo.BabyMaking();
             }
-
-
-
-            Console.ReadKey();
         }
+
         public static void ShowMap()
         {
-
-            
+            Map MyMap = new Map();
+            MyMap.Show();
         }
     }
 }

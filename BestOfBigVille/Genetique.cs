@@ -21,7 +21,7 @@ namespace BestOfBigVille
         public void TriageList()
         {
             List<List<Ville>> TestListVille = new List<List<Ville>>();
-            for (int i = 0; i <= 33333; i++)
+            for (int i = 0; i <= 5000; i++)
             {
                 List<Ville> NewVille = MesVilles.OrderBy(x => Guid.NewGuid()).ToList();
                 //List<Ville> NewVille = MesVilles;

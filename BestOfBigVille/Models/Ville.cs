@@ -14,6 +14,7 @@ namespace BestOfBigVille.Models
         public double lng { get; set; }
 
         public GeoCoordinate GetCoord() => new GeoCoordinate { Latitude = lan, Longitude = lng };
-        
+
+        public Gmap GoogleMap() => new Gmap { lat = lan, lng = lng, title = city };
     }
 }
