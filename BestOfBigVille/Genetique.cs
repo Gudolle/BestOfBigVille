@@ -73,7 +73,7 @@ namespace BestOfBigVille
         public void BabyMaking()
         {
             Random random = new Random();
-            for (int i = 0; i <= 4500; i++)
+            for (int i = 0; i <= 8200; i++)
             {
                 if (i % 150 == 0)
                 {
@@ -131,6 +131,8 @@ namespace BestOfBigVille
             Ville tmp = MutantBaby.Villes[MutatedChromosome1];
             MutantBaby.Villes[MutatedChromosome1] = MutantBaby.Villes[MutatedChromosome2];
             MutantBaby.Villes[MutatedChromosome2] = tmp;
+
+            MutantBaby.Villes.ForEach(x => MutantBaby.Identifiant += x.city);
 
             // Add mutant baby if it hasn't appeared before
             if (HistoDeListVille.Where(x => x.Identifiant == MutantBaby.Identifiant).ToList().Count == 0)
