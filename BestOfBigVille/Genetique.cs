@@ -9,7 +9,7 @@ namespace BestOfBigVille
     class Genetique
     {
         private List<Ville> MesVilles { get; set; }
-        private List<ComposantList> MaListDeListVille = new List<ComposantList>();
+        public List<ComposantList> MaListDeListVille = new List<ComposantList>();
         private List<ComposantList> HistoDeListVille = new List<ComposantList>();
 
 
@@ -21,7 +21,7 @@ namespace BestOfBigVille
         public void TriageList()
         {
             List<List<Ville>> ListVille = new List<List<Ville>>();
-            for (int i = 0; i <= 10000; i++)
+            for (int i = 0; i <= 500; i++)
             {
                 List<Ville> NewVille = MesVilles.OrderBy(x => Guid.NewGuid()).ToList();
                 //List<Ville> NewVille = MesVilles;
@@ -51,7 +51,7 @@ namespace BestOfBigVille
 
         public void CalculDistance()
         {
-            foreach (ComposantList item in MaListDeListVille)
+            foreach (ComposantList item in MaListDeListVille.Where(x => x.DistanceTotal == 0))
             {
                 item.DistanceTotal = 0;
                 for (int i = 0; i < item.Villes.Count - 1; i++)
@@ -62,8 +62,8 @@ namespace BestOfBigVille
 
 
             Console.WriteLine("===================================");
-            MaListDeListVille = MaListDeListVille.OrderBy(x => x.DistanceTotal).Take(1800).ToList();
-            HistoDeListVille = HistoDeListVille.OrderBy(x => x.DistanceTotal).Take(1800).ToList();
+            MaListDeListVille = MaListDeListVille.OrderBy(x => x.DistanceTotal).Take(50).ToList();
+            HistoDeListVille = HistoDeListVille.OrderBy(x => x.DistanceTotal).Take(50).ToList();
             MaListDeListVille.Take(3).ToList().ForEach(x => Console.WriteLine("Distance  = " + Math.Floor(x.DistanceTotal) + "km"));
 
 
@@ -73,9 +73,9 @@ namespace BestOfBigVille
         public void BabyMaking()
         {
             Random random = new Random();
-            for (int i = 0; i <= 8200; i++)
+            for (int i = 0; MaListDeListVille.Count <= 400; i++)
             {
-                if (i % 150 == 0)
+                if (random.NextDouble() < 0.005)
                 {
                     AddMutant();
                 }
@@ -105,8 +105,8 @@ namespace BestOfBigVille
                             MaListDeListVille.Add(Enfant);
                             HistoDeListVille.Add(Enfant);
                         }
-                        else
-                            AddMutant();
+                       // else
+                         //   AddMutant();
 
 
                     }

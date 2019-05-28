@@ -19,13 +19,13 @@ namespace BestOfBigVille
             //MyMap.Show();
 
             Algo.TriageList();
-            for (int i = 0; i < 500; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 Algo.CalculDistance();
                 Algo.BabyMaking();
             }
 
-
+            Console.WriteLine(Algo.MaListDeListVille.First().Identifiant);
 
             Console.ReadKey();
         }
